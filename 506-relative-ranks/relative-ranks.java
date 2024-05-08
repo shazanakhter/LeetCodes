@@ -1,24 +1,38 @@
 class Solution {
-    public String[] findRelativeRanks(int[] score) {
-        int[] count=new int[score.length];
-        int n=score.length;
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(score[i]<score[j]){
-                    count[i]=count[i]+1;
-                }
+
+    public static int findMax(int[] score){
+        int maxVal=Integer.MIN_VALUE;
+        for(int i=0;i<score.length;i++){
+            if(score[i]>maxVal){
+                maxVal=score[i];
             }
         }
-        String [] ans=new String[n];
-        for(int i=0;i<n;i++){
-            if(count[i]==0){
-                ans[i]="Gold Medal";
-            }else if(count[i]==1){
-                ans[i]="Silver Medal";
-            } else if(count[i]==2){
-                ans[i]="Bronze Medal";
-            }else if(count[i]>2){
-                ans[i]=String.valueOf(count[i]+1);
+        return maxVal;
+    }
+    public String[] findRelativeRanks(int[] score) {
+        int maxVal=findMax(score);
+        int[] index=new int[maxVal+1];
+        for(int i=0;i<score.length;i++){
+            index[score[i]]=i+1;
+        }
+        String[] ans=new String[score.length];
+        int rank=1;
+        for(int i=maxVal;i>=0;i--){
+            if(index[i]!=0){
+                int originalIndex=index[i]-1;
+                if(rank==1){
+                    ans[originalIndex]="Gold Medal";
+                }else if(rank==2){
+                    ans[originalIndex]="Silver Medal";
+                }else if(rank==3){
+                    ans[originalIndex]="Bronze Medal";
+                }else{
+                    ans[originalIndex]=String.valueOf(rank);
+                }
+                rank++;
+            }
+            if(rank>score.length){
+                break;
             }
         }
         return ans;
