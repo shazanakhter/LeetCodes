@@ -25,7 +25,7 @@ class Solution {
         while(!q.isEmpty()){
             int n=q.size();
             for(int i=0;i<n;i++){
-                TreeNode rem=q.remove();
+                TreeNode rem=q.poll();
                 if(rem.left!=null){
                     q.add(rem.left);
                 }
