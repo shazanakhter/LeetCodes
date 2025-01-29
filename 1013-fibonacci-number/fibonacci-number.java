@@ -1,19 +1,20 @@
 class Solution {
     public int fib(int n) {
-        int a=0;
-        int b=1;
-        if(n==0){
-            return a;
+        int[] dp=new int[n+1];
+        Arrays.fill(dp,-1);
+        int ans=helper(n,dp);
+        return ans;
+    }
+    public int helper(int n, int[] dp){
+        if(n==0||n==1){
+            return n;
         }
-        if(n==1){
-            return b;
+        if(dp[n]!=-1){
+            return dp[n];
         }
-        int sum=0;
-        for(int i=2;i<=n;i++){
-            sum=a+b;
-            a=b;
-            b=sum;
-        }
-        return sum;
+        int a=helper(n-1,dp);
+        int b=helper(n-2,dp);
+        dp[n]=a+b;
+        return a+b;
     }
 }
