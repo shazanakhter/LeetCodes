@@ -24,16 +24,10 @@ class Solution {
 
         int i =0;
         while(i<n){
-            if(nums[i] == i+1){
+            if(nums[i] == i+1||nums[i] <= 0 || nums[i] > n){
                 i++;
                 continue;
             }
-
-            if(nums[i] <= 0 || nums[i] > n){
-                i++;
-                continue;
-            }
-
             int idx1 = i;
             int idx2 = nums[i] - 1;
 
