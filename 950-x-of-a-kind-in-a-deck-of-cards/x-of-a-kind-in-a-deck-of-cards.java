@@ -20,9 +20,9 @@ class Solution {
         for(int element:hm.keySet()){
             ans=gcd(ans,hm.get(element));
         }
-        if(ans>1){
-            return true;
+        if(ans==1){
+            return false;
         }
-        return false;
+        return true;
     }
 }
