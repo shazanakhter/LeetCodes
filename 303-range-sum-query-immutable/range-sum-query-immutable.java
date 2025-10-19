@@ -2,18 +2,18 @@ class NumArray {
     int[] psum;
 
     public NumArray(int[] nums) {
-    psum = new int[nums.length];
-    psum[0] = nums[0];
-    for(int i = 1; i < nums.length; i++)
-        psum[i] = psum[i - 1] + nums[i];
+        psum=new int[nums.length];
+        psum[0]=nums[0];
+        for(int i=1;i<nums.length;i++){
+            psum[i]=nums[i]+psum[i-1];
+        }
     }
     
     public int sumRange(int left, int right) {
-        if(left == 0)
-        return psum[right];
-    
-    return psum[right] - psum[left - 1];
-
+        if(left==0){
+            return psum[right];
+        }
+        return psum[right]-psum[left-1];
     }
 }
 
