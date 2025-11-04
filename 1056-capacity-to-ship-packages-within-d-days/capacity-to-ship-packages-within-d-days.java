@@ -1,38 +1,37 @@
 class Solution {
-
-    public int calculate(int[] weights, int m){
-        int days=1;
-        int sum=0;
-        for(int i=0;i<weights.length;i++){
-            if(sum+weights[i]>m){
-                days++;
-                sum=0;
-            }
-            sum+=weights[i];
-        }
-        return days;
-    }
     public int shipWithinDays(int[] weights, int days) {
-        int lo=Integer.MIN_VALUE;
-        int ho=0;
+        int low=Integer.MIN_VALUE;
+        int high=0;
         for(int i=0;i<weights.length;i++){
-            if(weights[i]>lo){
-                lo=weights[i];
+            if(weights[i]>low){
+                low=weights[i];
             }
-            ho=ho+weights[i];
+            high+=weights[i];
         }
         int ans=0;
-        while(lo<=ho){
-            int m=lo+(ho-lo)/2;
-            int reqdays=calculate(weights,m);
-            if(reqdays<=days){
-                ans=m;
-                ho=m-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            int reqDays= calculateDays(weights,mid);
+            if(reqDays<=days){
+                ans=mid;
+                high=mid-1;
             }else{
-                lo=m+1;
+                low=mid+1;
             }
         }
         return ans;
-        
+    }
+
+    public int calculateDays(int[] weights, int m){
+        int sum=0;
+        int day=1;
+        for(int i=0;i<weights.length;i++){
+            if(sum+weights[i]>m){
+                sum=0;
+                day++;
+            }
+            sum=sum+weights[i];
+        }
+        return day;
     }
 }
