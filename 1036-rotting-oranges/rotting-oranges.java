@@ -14,10 +14,14 @@ class Solution {
         Queue<Pair>q=new LinkedList<>();
         int m=grid.length;
         int n=grid[0].length;
+       // int count2=0;
+        int count1=0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j]==2){
                     q.add(new Pair(i,j,0));
+                }else if(grid[i][j]==1){
+                    count1++;
                 }
             }
         }
@@ -31,27 +35,27 @@ class Solution {
             if(r-1>=0&&grid[r-1][c]==1){
                 q.add(new Pair(r-1,c,t+1));
                 grid[r-1][c]=2;
+                count1--;
             }
             if(c-1>=0&&grid[r][c-1]==1){
                 q.add(new Pair(r,c-1,t+1));
                 grid[r][c-1]=2;
+                count1--;
             }
             if(r+1<m&&grid[r+1][c]==1){
                 q.add(new Pair(r+1,c,t+1));
                 grid[r+1][c]=2;
+                count1--;
             }
             if(c+1<n&&grid[r][c+1]==1){
                 q.add(new Pair(r,c+1,t+1));
                 grid[r][c+1]=2;
+                count1--;
             }
         }
 
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(grid[i][j]==1){
-                    return -1;
-                }
-            }
+        if(count1!=0){
+            return -1;
         }
         return ans;
     }
