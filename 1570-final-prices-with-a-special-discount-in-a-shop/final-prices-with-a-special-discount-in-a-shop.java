@@ -1,15 +1,15 @@
 class Solution {
     public int[] finalPrices(int[] prices) {
-        for(int i=0;i<prices.length-1;i++){
-            int idx=i+1;
-            while(idx<prices.length){
-                if(prices[i]>=prices[idx]){
-                    prices[i]=prices[i]-prices[idx];
-                    break;
-                }
-                idx++;
+        int[] result=prices.clone();
+
+        Stack<Integer> st= new Stack<>();
+
+        for(int i=0;i<prices.length;i++){
+            while(!st.isEmpty()&&prices[st.peek()]>=prices[i]){
+                result[st.pop()]-=prices[i];
             }
+            st.push(i);
         }
-        return prices;
+        return result;
     }
 }
